@@ -66,7 +66,7 @@ public class HBaseBolt implements IRichBolt {
 			if( hTable != null ) {
 				hTable.put( getPutFromTuple( tuple ) );
 			}
-			collector.ack( tuple );
+			collector.ack( tuple );//다음 bolt할때 넘기는것->work한테 넘기는거->없으면 tuple끝
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
