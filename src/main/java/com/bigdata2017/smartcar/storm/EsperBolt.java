@@ -47,7 +47,7 @@ public class EsperBolt extends BaseBasicBolt {
 				"			areaNumber"     +
 				"     FROM	DrivingInfo.win:time_batch(" + DURATION_ESTIMATE + " sec) " +
 				" GROUP BY	carNumber"      +
-				"   HAVING  AVG(speed) > "  + MAX_SPEED;
+				"   HAVING  AVG(speed) > "  + MAX_SPEED;//win-> epl로 시간 속도 새는것
 		EPStatement stmtESP = espService.getEPAdministrator().createEPL( eplOverSpeed );
 		stmtESP.addListener( new UpdateListener(){
 			@Override
@@ -84,7 +84,7 @@ public class EsperBolt extends BaseBasicBolt {
 		if( isOverSpeedEvent ) {
 			//발생일시(14자리), 차량번호
 			collector.emit( new Values( drivingInfo.getDate().substring(0,8), 
-										drivingInfo.getCarNumber() + "-" + drivingInfo.getDate() ) );
+										drivingInfo.getCarNumber() + "-" + drivingInfo.getDate() ) );//emit으로 다음 bolt로 보내버리는 작업
 			isOverSpeedEvent = false;
 		}		
 	}
