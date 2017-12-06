@@ -38,7 +38,7 @@ public class SmartCarDrivingTopology {
 		TopologyBuilder topologyBuilder = new TopologyBuilder();
 		
 		// Spout(Kafka) 생성 및 등록
-		BrokerHosts brokerHosts = new ZkHosts( "hadoop2.poptok.com:2181" );
+		BrokerHosts brokerHosts = new ZkHosts( "redis.poptok.com:2181" );
 		String topicName = "SmartCar-Topic";
 		String zookeeperPathName = "/SmartCar-Topic";
 
@@ -60,7 +60,7 @@ public class SmartCarDrivingTopology {
 		JedisPoolConfig jedisPoolConfig =
 			new JedisPoolConfig.
 			Builder().
-			setHost( "lx02.hadoop.com" ).
+			setHost( "hadoop2.poptok.com" ).
 			setPort( 6379 ).
 			build();
 		topologyBuilder.setBolt( "redisBolt", new RedisBolt( jedisPoolConfig ), 1 ).shuffleGrouping( "esperBolt" );
