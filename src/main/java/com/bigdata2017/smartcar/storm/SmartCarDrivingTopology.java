@@ -60,7 +60,7 @@ public class SmartCarDrivingTopology {
 		JedisPoolConfig jedisPoolConfig =
 			new JedisPoolConfig.
 			Builder().
-			setHost( "hadoop2.poptok.com" ).
+			setHost( "redis.poptok.com" ).
 			setPort( 6379 ).
 			build();
 		topologyBuilder.setBolt( "redisBolt", new RedisBolt( jedisPoolConfig ), 1 ).shuffleGrouping( "esperBolt" );
